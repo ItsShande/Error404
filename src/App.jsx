@@ -1,14 +1,29 @@
-import React from 'react'
+import { useState } from 'react'
 import './App.css'
-import Navbar from './Navbar'
-import InicioSesion from './InicioSesion'
+import Navbar from './components/Navbar.jsx'
+import DataButton from './components/DatabaseConection.jsx'
+import WeatherCard from './components/WeatherCard.jsx'
 
 function App() {
     return (
         <>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"></link>
-        <Navbar/>
-        <InicioSesion/>
+            <Navbar />
+            <div className='main'>
+                <div className='inputsContainer'>
+                    <input className="inputCiudad inputClass" type="text" placeholder='Ciudad' />
+                    <input className="inputEstado inputClass" type="text" placeholder='Estado' />
+                    <input className="inputPais inputClass" type="text" placeholder='País' />
+                </div>
+                <DataButton />
+                <div className='dataContainer'>
+                    <WeatherCard/>
+                    <WeatherCard/>
+                    <WeatherCard/>
+                    <WeatherCard/>
+                    <WeatherCard/>
+                    <WeatherCard/>
+                </div>
+            </div>
         </>
     )
 }
