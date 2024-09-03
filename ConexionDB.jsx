@@ -9,15 +9,25 @@ const ConexionDB = () => {
     const [longitud, setLongitud] = useState("-64.13");
     const [dia, setDia] = useState("");
     const [hora, setHora] = useState("");
-    const [data, setData] = useState([]);
+    const [dataClima, setDataClima] = useState([]);
+    const [dataAire, setDataAire] = useState([]);
 
-    let AirPolutionLink = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${latitud}&lon=${longitud}&appid=${APIKey}`;
-    let ApiLink = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitud}&lon=${longitud}&exclude=${hora},${dia}&appid=${APIKey}`;
+    let AirPolutionLink = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${latitud}&lon=${longitud}&appid=${APIKey}&units=metric`;
+    let ApiLink = `https://api.openweathermap.org/data/2.5/weather?lat=${latitud}&lon=${longitud}&appid=${APIKey}&units=metric`;
 
-    const obtenerDatos = async () => {
+    const obtenerCalidadAire = async () => {
         try {
             const response = await axios.get(AirPolutionLink);
-            setData(response.data);
+            setDataAire(response.data);
+            console.log(response.data);
+        } catch (error) {
+            console.error("Error al obtener los datos:", error);
+        }
+    };
+    const obtenerDatosClima = async () => {
+        try {
+            const response = await axios.get(ApiLink);
+            setDataClima(response.data);
             console.log(response.data);
         } catch (error) {
             console.error("Error al obtener los datos:", error);
@@ -26,7 +36,8 @@ const ConexionDB = () => {
 
     return (
         <div>
-            <button onClick={obtenerDatos}>Buscar</button>
+            <button onClick={obtenerCalidadAire}>Aire</button>
+            <button onClick={obtenerDatosClima}>Clima</button>
         </div>
     );
 };
